@@ -1,6 +1,6 @@
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
+import { Slot, Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
@@ -10,28 +10,40 @@ import { useColorScheme } from '@/hooks/useColorScheme';
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
-export default function RootLayout() {
+ const  RootLayout = () =>  {
   const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
+  
+  const [fontsLoaded, error] = useFonts({
+    "Poppins-Black": require("../assets/fonts/fonts/Poppins-Black.ttf"),
+    "Poppins-Bold": require("../assets/fonts/fonts/Poppins-Bold.ttf"),
+    "Poppins-ExtraBold": require("../assets/fonts/fonts/Poppins-ExtraBold.ttf"),
+    "Poppins-ExtraLight": require("../assets/fonts/fonts/Poppins-ExtraLight.ttf"),
+    "Poppins-Light": require("../assets/fonts/fonts/Poppins-Light.ttf"),
+    "Poppins-Medium": require("../assets/fonts/fonts/Poppins-Medium.ttf"),
+    "Poppins-Regular": require("../assets/fonts/fonts/Poppins-Regular.ttf"),
+    "Poppins-SemiBold": require("../assets/fonts/fonts/Poppins-SemiBold.ttf"),
+    "Poppins-Thin": require("../assets/fonts/fonts/Poppins-Thin.ttf"),
   });
 
   useEffect(() => {
-    if (loaded) {
+    if (error) throw error;
+
+    if (fontsLoaded) {
       SplashScreen.hideAsync();
     }
-  }, [loaded]);
+  }, [fontsLoaded, error]);
 
-  if (!loaded) {
+  if (!fontsLoaded) {
+    return null;
+  }
+
+  if (!fontsLoaded && !error) {
     return null;
   }
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-    </ThemeProvider>
+    <Slot/>
   );
 }
+
+export default RootLayout;

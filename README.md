@@ -8,6 +8,7 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
 
    ```bash
    npm install
+   node version 20.13.0
    ```
 
 2. Start the app
