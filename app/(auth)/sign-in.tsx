@@ -26,7 +26,7 @@ const SignIn = () => {
         placeholderText='Your unique username'
         secureTextEntry
         />
-        <Text className='text-white mt-4 text-right'>Forgot password</Text>
+        <Link href='/' className='text-white mt-4 text-right text-secondary-100'>Forgot password</Link>
       <CustomButton 
       handlePross={() => router.push('/home')}
       title={'Login In'}

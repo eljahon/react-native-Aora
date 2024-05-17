@@ -10,6 +10,7 @@ const screenOptions = {
   tabBarShowLabel: false,
   tabBarActiveTintColor: '#FFA001',
   tabBarInactiveTintColor: '#CDCDE0',
+  tabBarHideOnKeyboard: true,
   tabBarStyle: {
     backgroundColor: '#161622',
     borderTopWidth: 1,
@@ -43,6 +44,9 @@ export default function TabLayout() {
         options={{
           title: 'Home',
           headerShown: false,
+          presentation: 'modal',
+              animationTypeForReplace: 'pop',
+              animation:'slide_from_right',
           tabBarIcon: ({color, focused}) => {
              return <TabIcon 
              color={color} 
